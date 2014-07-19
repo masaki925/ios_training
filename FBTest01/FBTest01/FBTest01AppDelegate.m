@@ -15,6 +15,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    // Parseに登録したアプリのApplicationIdとclientKey
+
+#ifdef DEBUG
+    NSLog(@"DEBUG");
+#endif
+    NSString *parseAppId     = [[NSProcessInfo processInfo] environment][@"PARSE_APP_ID"];
+    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
+    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
+
     return YES;
 }
 
@@ -22,8 +32,6 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    // Parseに登録したアプリのApplicationIdとclientKey
-    [Parse setApplicationId:@"5ymvPV5KaUGkDAXe7qCPYJouWRuYAEF2D9XfbW13" clientKey:@"MKsjaEZc4xGJ72K6ybjPMFCf9vpTw8RyeCxqif3S"];
 
     // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
     BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:self.session];
