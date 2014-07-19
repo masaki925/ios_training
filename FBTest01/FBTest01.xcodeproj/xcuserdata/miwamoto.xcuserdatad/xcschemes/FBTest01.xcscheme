@@ -67,6 +67,18 @@
             ReferencedContainer = "container:FBTest01.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "PARSE_APP_ID"
+            value = "M5KS1WIk4VT8tkLzUec9YwrtNdk9cBoAs0nQjsKs"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PARSE_CLIENT_KEY"
+            value = "FJTcjyb4leye8v63P7UNnW2jJkUNBsbbALAfk0lS"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

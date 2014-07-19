@@ -18,15 +18,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     [self updateView];
-    
+
     // ログインしてない状態
     if (!appDelegate.session.isOpen) {
         appDelegate.session = [[FBSession alloc] init];
-        
+
         // トークンがキャッシュされてる状態
         if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
 
@@ -50,7 +50,7 @@
 
 - (IBAction)pushLogin:(id)sender {
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
+
     // 既にログインしている場合
     if (appDelegate.session.isOpen) {
         [appDelegate.session closeAndClearTokenInformation];
@@ -76,7 +76,7 @@
 - (void)updateView
 {
     NSLog(@"updateView");
-    
+
     // get the app delegate, so that we can reference the session property
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (appDelegate.session.isOpen) {
@@ -86,6 +86,10 @@
         [self.textLabel setText:[NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@",
                                       appDelegate.session.accessTokenData.accessToken]];
         NSLog(@"accessToken: %@", appDelegate.session.accessTokenData.accessToken);
+
+        // FBログイン後、Push通知の登録／更新を実施
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+
     } else {
         NSLog(@"updateView NOT isOpen");
         // login-needed account UI is shown whenever the session is closed
@@ -96,7 +100,7 @@
 
 - (IBAction)getData:(id)sender {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://compathy.masaki925.com:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://10.0.1.6:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -108,7 +112,7 @@
     if (appDelegate.session.isOpen) {
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:@"http://compathy.masaki925.com:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:@"http://10.0.1.6:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
