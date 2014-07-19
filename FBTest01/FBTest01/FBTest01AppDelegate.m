@@ -8,6 +8,7 @@
 
 #import "FBTest01AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <Parse/Parse.h>
 
 @implementation FBTest01AppDelegate
 
@@ -21,6 +22,8 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    // Parseに登録したアプリのApplicationIdとclientKey
+    [Parse setApplicationId:@"5ymvPV5KaUGkDAXe7qCPYJouWRuYAEF2D9XfbW13" clientKey:@"MKsjaEZc4xGJ72K6ybjPMFCf9vpTw8RyeCxqif3S"];
 
     // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
     BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:self.session];
@@ -55,6 +58,30 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+#pragma mark - Push Notification
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // ParseにdeviceTokenを送信
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+
+    // サービス側にdeviceTokenを登録
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"remote notification error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    // DEBUG
+    [PFPush handlePush:userInfo];
 }
 
 @end

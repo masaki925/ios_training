@@ -86,6 +86,8 @@
         [self.textLabel setText:[NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@",
                                       appDelegate.session.accessTokenData.accessToken]];
         NSLog(@"accessToken: %@", appDelegate.session.accessTokenData.accessToken);
+        // FBログイン後、Push通知の登録／更新を実施
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     } else {
         NSLog(@"updateView NOT isOpen");
         // login-needed account UI is shown whenever the session is closed
