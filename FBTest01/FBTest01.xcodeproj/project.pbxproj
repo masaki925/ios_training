@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		385B728DBE064A8F8F54196E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A7F22D957A4F1F973DA45E /* libPods.a */; };
+		3DBF5092197D089200C2CA07 /* SubStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */; };
+		3DBF5095197D08FD00C2CA07 /* FBTest01AnotherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF5094197D08FD00C2CA07 /* FBTest01AnotherViewController.m */; };
 		3DC328A1196D12B900FA9A11 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC328A0196D12B900FA9A11 /* Foundation.framework */; };
 		3DC328A3196D12B900FA9A11 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC328A2196D12B900FA9A11 /* CoreGraphics.framework */; };
 		3DC328A5196D12B900FA9A11 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC328A4196D12B900FA9A11 /* UIKit.framework */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubStoryboard.storyboard; sourceTree = "<group>"; };
+		3DBF5093197D08FD00C2CA07 /* FBTest01AnotherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01AnotherViewController.h; sourceTree = "<group>"; };
+		3DBF5094197D08FD00C2CA07 /* FBTest01AnotherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTest01AnotherViewController.m; sourceTree = "<group>"; };
 		3DC3289D196D12B900FA9A11 /* FBTest01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBTest01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC328A0196D12B900FA9A11 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3DC328A2196D12B900FA9A11 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,6 +132,9 @@
 				3DC328AF196D12B900FA9A11 /* FBTest01AppDelegate.h */,
 				3DC328B0196D12B900FA9A11 /* FBTest01AppDelegate.m */,
 				3DC328B2196D12B900FA9A11 /* Main.storyboard */,
+				3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */,
+				3DBF5093197D08FD00C2CA07 /* FBTest01AnotherViewController.h */,
+				3DBF5094197D08FD00C2CA07 /* FBTest01AnotherViewController.m */,
 				3DC328B5196D12B900FA9A11 /* FBTest01ViewController.h */,
 				3DC328B6196D12B900FA9A11 /* FBTest01ViewController.m */,
 				3DC328B8196D12B900FA9A11 /* Images.xcassets */,
@@ -253,6 +261,7 @@
 			files = (
 				3DC328B9196D12B900FA9A11 /* Images.xcassets in Resources */,
 				3DC328AB196D12B900FA9A11 /* InfoPlist.strings in Resources */,
+				3DBF5092197D089200C2CA07 /* SubStoryboard.storyboard in Resources */,
 				3DC328B4196D12B900FA9A11 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +317,7 @@
 				3DC328AD196D12B900FA9A11 /* main.m in Sources */,
 				3DC328B7196D12B900FA9A11 /* FBTest01ViewController.m in Sources */,
 				3DC328B1196D12B900FA9A11 /* FBTest01AppDelegate.m in Sources */,
+				3DBF5095197D08FD00C2CA07 /* FBTest01AnotherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

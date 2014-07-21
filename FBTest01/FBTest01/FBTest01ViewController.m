@@ -102,7 +102,7 @@
 
 - (IBAction)getData:(id)sender {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://compathy.masaki925.com:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://10.0.1.4:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -114,7 +114,7 @@
     if (appDelegate.session.isOpen) {
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:@"http://compathy.masaki925.com:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:@"http://10.0.1.4:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *cyAccessToken = responseObject[@"access_token"];
             NSString *username      = responseObject[@"username"];
 
@@ -129,5 +129,11 @@
             NSLog(@"Error: %@", error);
         }];
     }
+}
+
+- (IBAction)openAnotherView:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *initialViewController = [storyboard instantiateInitialViewController];
+    [self presentViewController:initialViewController animated:NO completion:nil];
 }
 @end

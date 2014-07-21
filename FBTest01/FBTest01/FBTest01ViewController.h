@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *getDataButton;
 - (IBAction)getData:(id)sender;
 - (IBAction)getToken:(id)sender;
+- (IBAction)openAnotherView:(id)sender;
 
 @end

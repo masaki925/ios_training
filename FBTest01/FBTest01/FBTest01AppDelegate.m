@@ -9,6 +9,8 @@
 #import "FBTest01AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
+#import <Security/Security.h>
+#import <UICKeyChainStore.h>
 
 @implementation FBTest01AppDelegate
 
@@ -20,6 +22,7 @@
 
 #ifdef DEBUG
     NSLog(@"DEBUG");
+    NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
 #endif
     NSString *parseAppId     = [[NSProcessInfo processInfo] environment][@"PARSE_APP_ID"];
     NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
