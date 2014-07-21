@@ -11,6 +11,8 @@
 #import "FBTest01AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <AFNetworking/AFNetworking.h>
+#import <Security/Security.h>
+#import <UICKeyChainStore.h>
 
 @implementation FBTest01ViewController
 
@@ -100,7 +102,7 @@
 
 - (IBAction)getData:(id)sender {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://10.0.1.6:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://compathy.masaki925.com:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -112,8 +114,17 @@
     if (appDelegate.session.isOpen) {
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:@"http://10.0.1.6:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+        [manager POST:@"http://compathy.masaki925.com:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *cyAccessToken = responseObject[@"access_token"];
+            NSString *username      = responseObject[@"username"];
+
+            [UICKeyChainStore setString:cyAccessToken forKey:@"cyAccessToken"];
+            NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
+
+            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            [ud setObject:username forKey:@"username"];
+            NSLog(@"username: %@", [ud objectForKey:@"username"]);
+
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         }];

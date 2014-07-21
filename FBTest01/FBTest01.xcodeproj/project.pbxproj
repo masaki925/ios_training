@@ -22,6 +22,7 @@
 		3DC328C2196D12B900FA9A11 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC328A4196D12B900FA9A11 /* UIKit.framework */; };
 		3DC328CA196D12B900FA9A11 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC328C8196D12B900FA9A11 /* InfoPlist.strings */; };
 		3DC328CC196D12B900FA9A11 /* FBTest01Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC328CB196D12B900FA9A11 /* FBTest01Tests.m */; };
+		3DEB61B4197CE17E009722C4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DEB61B3197CE17E009722C4 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		3DC328C7196D12B900FA9A11 /* FBTest01Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FBTest01Tests-Info.plist"; sourceTree = "<group>"; };
 		3DC328C9196D12B900FA9A11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DC328CB196D12B900FA9A11 /* FBTest01Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBTest01Tests.m; sourceTree = "<group>"; };
+		3DEB61B2197CE0E4009722C4 /* FBTest01.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FBTest01.entitlements; sourceTree = "<group>"; };
+		3DEB61B3197CE17E009722C4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		73A7F22D957A4F1F973DA45E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F28D062FA5F4F54AD97731A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DEB61B4197CE17E009722C4 /* Security.framework in Frameworks */,
 				3DC328A3196D12B900FA9A11 /* CoreGraphics.framework in Frameworks */,
 				3DC328A5196D12B900FA9A11 /* UIKit.framework in Frameworks */,
 				3DC328A1196D12B900FA9A11 /* Foundation.framework in Frameworks */,
@@ -106,6 +110,7 @@
 		3DC3289F196D12B900FA9A11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3DEB61B3197CE17E009722C4 /* Security.framework */,
 				3DC328A0196D12B900FA9A11 /* Foundation.framework */,
 				3DC328A2196D12B900FA9A11 /* CoreGraphics.framework */,
 				3DC328A4196D12B900FA9A11 /* UIKit.framework */,
@@ -118,6 +123,7 @@
 		3DC328A6196D12B900FA9A11 /* FBTest01 */ = {
 			isa = PBXGroup;
 			children = (
+				3DEB61B2197CE0E4009722C4 /* FBTest01.entitlements */,
 				3DC328AF196D12B900FA9A11 /* FBTest01AppDelegate.h */,
 				3DC328B0196D12B900FA9A11 /* FBTest01AppDelegate.m */,
 				3DC328B2196D12B900FA9A11 /* Main.storyboard */,
@@ -210,6 +216,11 @@
 				TargetAttributes = {
 					3DC3289C196D12B900FA9A11 = {
 						DevelopmentTeam = 4JZ8B336K6;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					3DC328BD196D12B900FA9A11 = {
 						TestTargetID = 3DC3289C196D12B900FA9A11;
@@ -422,13 +433,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Masaki Iwamoto (4JZ8B336K6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masaki Iwamoto (4JZ8B336K6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBTest01/FBTest01-Prefix.pch";
 				INFOPLIST_FILE = "FBTest01/FBTest01-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43B6B680-10FA-45A4-AC19-D45CA7489315";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -439,13 +450,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Masaki Iwamoto (4JZ8B336K6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masaki Iwamoto (4JZ8B336K6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBTest01/FBTest01-Prefix.pch";
 				INFOPLIST_FILE = "FBTest01/FBTest01-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43B6B680-10FA-45A4-AC19-D45CA7489315";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

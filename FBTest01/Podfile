@@ -4,3 +4,5 @@ pod 'SVProgressHUD', '~> 1.0'
 pod 'Facebook-iOS-SDK', '~> 3.15'
 pod "AFNetworking", "~> 2.0"
 pod 'Parse', '~> 1.2.20'
+pod 'UICKeyChainStore'
+
