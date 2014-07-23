@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <Security/Security.h>
 #import <UICKeyChainStore.h>
+#import "FBTest01Auth.h"
 
 @implementation FBTest01AppDelegate
 
@@ -24,11 +25,35 @@
     NSLog(@"DEBUG");
     NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
 #endif
-    NSString *parseAppId     = [[NSProcessInfo processInfo] environment][@"PARSE_APP_ID"];
-    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
-    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
+//    NSString *parseAppId     = [[NSProcessInfo processInfo] environment][@"PARSE_APP_ID"];
+//    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
+//    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
+
+    FBTest01Auth *cyAuth = [[FBTest01Auth alloc] init];
+    FBTest01User *currentUser = [cyAuth currentUser];
+
+    NSLog(@"currentUser         : %@", currentUser);
+    NSLog(@"currentUser.isActive: %d", currentUser.isActive);
+
+    if (!currentUser || !currentUser.isActive) {
+        [self changeRootViewController];
+        return YES;
+    }
+    
+//    if (!cyToken.isValid) {
+//        [cyToken updateToken];
+//    }
+//    
+//    [self updateDeviceToken];
 
     return YES;
+}
+
+- (void) changeRootViewController
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *initialViewController = [storyboard instantiateInitialViewController];
+    self.window.rootViewController = initialViewController;
 }
 
 - (BOOL)application:(UIApplication *)application

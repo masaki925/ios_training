@@ -25,23 +25,23 @@
 
     [self updateView];
 
-    // ログインしてない状態
-    if (!appDelegate.session.isOpen) {
-        appDelegate.session = [[FBSession alloc] init];
-
-        // トークンがキャッシュされてる状態
-        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
-
-            // セッションを開く
-            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-                                                             FBSessionState status,
-                                                             NSError *error) {
-                [NSThread sleepForTimeInterval:1.0f];
-                NSLog(@"viewDidLoad: isOpen");
-                [self updateView];
-            }];
-        }
-    }
+//    // ログインしてない状態
+//    if (!appDelegate.session.isOpen) {
+//        appDelegate.session = [[FBSession alloc] init];
+//
+//        // トークンがキャッシュされてる状態
+//        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
+//
+//            // セッションを開く
+//            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+//                                                             FBSessionState status,
+//                                                             NSError *error) {
+//                [NSThread sleepForTimeInterval:1.0f];
+//                NSLog(@"viewDidLoad: isOpen");
+//                [self updateView];
+//            }];
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,8 +102,9 @@
 
 - (IBAction)getData:(id)sender {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://10.0.1.4:9000/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
+
+    [manager GET:@"http://cy-staging.wanderlust.co.jp/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {        NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
