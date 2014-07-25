@@ -13,7 +13,7 @@
 
 - (FBTest01User *) currentUser {
     NSLog(@"FBTest01Auth currentUser");
-    return [[FBTest01User alloc] init];
+    return [FBTest01User new];
 }
 
 @end

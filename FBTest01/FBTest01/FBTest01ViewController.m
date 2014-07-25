@@ -25,23 +25,23 @@
 
     [self updateView];
 
-//    // ログインしてない状態
-//    if (!appDelegate.session.isOpen) {
-//        appDelegate.session = [[FBSession alloc] init];
-//
-//        // トークンがキャッシュされてる状態
-//        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
-//
-//            // セッションを開く
-//            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-//                                                             FBSessionState status,
-//                                                             NSError *error) {
-//                [NSThread sleepForTimeInterval:1.0f];
-//                NSLog(@"viewDidLoad: isOpen");
-//                [self updateView];
-//            }];
-//        }
-//    }
+    // ログインしてない状態
+    if (!appDelegate.session.isOpen) {
+        appDelegate.session = [[FBSession alloc] init];
+
+        // トークンがキャッシュされてる状態
+        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
+
+            // セッションを開く
+            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                             FBSessionState status,
+                                                             NSError *error) {
+                [NSThread sleepForTimeInterval:1.0f];
+                NSLog(@"viewDidLoad: isOpen");
+                [self updateView];
+            }];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,7 +104,10 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
 
-    [manager GET:@"http://cy-staging.wanderlust.co.jp/api/countries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {        NSLog(@"JSON: %@", responseObject);
+    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
+    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
+
+    [manager GET:[NSString stringWithFormat:@"%@://%@/api/countries", cyProtocol, cyFqdn] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {        NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
@@ -114,8 +117,11 @@
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (appDelegate.session.isOpen) {
 
+        NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
+        NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
+
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:@"http://10.0.1.4:9000/api/sessions" parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:[NSString stringWithFormat:@"%@://%@/api/sessions", cyProtocol, cyFqdn] parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken}} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *cyAccessToken = responseObject[@"access_token"];
             NSString *username      = responseObject[@"username"];
 

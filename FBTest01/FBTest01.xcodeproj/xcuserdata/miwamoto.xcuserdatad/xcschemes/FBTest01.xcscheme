@@ -74,6 +74,16 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "CY_FQDN"
+            value = "compathy.masaki925.com:9000"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "CY_PROTOCOL"
+            value = "http"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "PARSE_CLIENT_KEY"
             value = "FJTcjyb4leye8v63P7UNnW2jJkUNBsbbALAfk0lS"
             isEnabled = "YES">
