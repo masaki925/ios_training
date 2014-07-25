@@ -85,8 +85,6 @@
         NSLog(@"updateView isOpen");
         // valid account UI is shown whenever the session is open
         [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
-        [self.textLabel setText:[NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@",
-                                      appDelegate.session.accessTokenData.accessToken]];
         NSLog(@"accessToken: %@", appDelegate.session.accessTokenData.accessToken);
 
         // FBログイン後、Push通知の登録／更新を実施
@@ -96,7 +94,6 @@
         NSLog(@"updateView NOT isOpen");
         // login-needed account UI is shown whenever the session is closed
         [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
-        [self.textLabel setText:@"Login to create a link to fetch account data"];
     }
 }
 
@@ -131,6 +128,8 @@
             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             [ud setObject:username forKey:@"username"];
             NSLog(@"username: %@", [ud objectForKey:@"username"]);
+            
+            [self openAnotherView];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -138,9 +137,13 @@
     }
 }
 
-- (IBAction)openAnotherView:(id)sender {
+- (void) openAnotherView {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *initialViewController = [storyboard instantiateInitialViewController];
     [self presentViewController:initialViewController animated:NO completion:nil];
+}
+
+- (IBAction)openAnotherView:(id)sender {
+    [self openAnotherView];
 }
 @end

@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "FBTest01User.h"
+#import "FBTest01AccessToken.h"
 
 @interface FBTest01Auth : NSObject
 
+@property BOOL sessionIsOpen;
+@property BOOL hasToken;
+
 - (FBTest01User *) currentUser;
+
+- (void)openSession:(void (^)(NSString *))success
+            failure:(void (^)(NSString *))failure;
 
 @end

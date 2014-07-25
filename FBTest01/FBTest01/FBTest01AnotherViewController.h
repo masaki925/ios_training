@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FBTest01AnotherViewController : UIViewController
+- (IBAction)rmTokenFromLocal:(id)sender;
 
 @end

@@ -10,6 +10,7 @@
 		385B728DBE064A8F8F54196E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A7F22D957A4F1F973DA45E /* libPods.a */; };
 		3D877A7F197F29DA003B68CA /* FBTest01Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D877A7E197F29DA003B68CA /* FBTest01Auth.m */; };
 		3D877A83197F2C9A003B68CA /* FBTest01User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D877A82197F2C9A003B68CA /* FBTest01User.m */; };
+		3D8DF9F91981F6B9008A7484 /* FBTest01AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8DF9F81981F6B9008A7484 /* FBTest01AccessToken.m */; };
 		3DBF5092197D089200C2CA07 /* SubStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */; };
 		3DBF5095197D08FD00C2CA07 /* FBTest01AnotherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF5094197D08FD00C2CA07 /* FBTest01AnotherViewController.m */; };
 		3DC328A1196D12B900FA9A11 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC328A0196D12B900FA9A11 /* Foundation.framework */; };
@@ -44,6 +45,8 @@
 		3D877A7E197F29DA003B68CA /* FBTest01Auth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBTest01Auth.m; path = ../FBTest01Auth.m; sourceTree = "<group>"; };
 		3D877A81197F2C9A003B68CA /* FBTest01User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01User.h; sourceTree = "<group>"; };
 		3D877A82197F2C9A003B68CA /* FBTest01User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTest01User.m; sourceTree = "<group>"; };
+		3D8DF9F71981F6B9008A7484 /* FBTest01AccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01AccessToken.h; sourceTree = "<group>"; };
+		3D8DF9F81981F6B9008A7484 /* FBTest01AccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTest01AccessToken.m; sourceTree = "<group>"; };
 		3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubStoryboard.storyboard; sourceTree = "<group>"; };
 		3DBF5093197D08FD00C2CA07 /* FBTest01AnotherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01AnotherViewController.h; sourceTree = "<group>"; };
 		3DBF5094197D08FD00C2CA07 /* FBTest01AnotherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTest01AnotherViewController.m; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 		3D877A80197F2B65003B68CA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3D8DF9F71981F6B9008A7484 /* FBTest01AccessToken.h */,
+				3D8DF9F81981F6B9008A7484 /* FBTest01AccessToken.m */,
 				3D877A7D197F29DA003B68CA /* FBTest01Auth.h */,
 				3D877A7E197F29DA003B68CA /* FBTest01Auth.m */,
 				3D877A81197F2C9A003B68CA /* FBTest01User.h */,
@@ -335,6 +340,7 @@
 			files = (
 				3DC328AD196D12B900FA9A11 /* main.m in Sources */,
 				3DC328B7196D12B900FA9A11 /* FBTest01ViewController.m in Sources */,
+				3D8DF9F91981F6B9008A7484 /* FBTest01AccessToken.m in Sources */,
 				3D877A7F197F29DA003B68CA /* FBTest01Auth.m in Sources */,
 				3D877A83197F2C9A003B68CA /* FBTest01User.m in Sources */,
 				3DC328B1196D12B900FA9A11 /* FBTest01AppDelegate.m in Sources */,
