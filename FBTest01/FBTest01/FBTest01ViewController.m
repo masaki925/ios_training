@@ -13,6 +13,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <Security/Security.h>
 #import <UICKeyChainStore.h>
+#import "FBTest01Auth.h"
 
 @implementation FBTest01ViewController
 
@@ -23,9 +24,30 @@
 
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
+    FBTest01Auth *cyAuth = [FBTest01Auth new];
+
     [self updateView];
 
     // ログインしてない状態
+
+
+    if (!cyAuth.sessionIsOpen) {
+        NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
+        if (cyAuth.hasToken) {
+            NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
+            
+            [cyAuth openSession:^(NSString *token){
+                NSLog(@"didFinishLaunchingWithOptions: openSession: success");
+                NSLog(@"%@", token);
+                [self mvToFeedView];
+            } failure:^(NSString *token){
+                NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
+                NSLog(@"error: %@", token);
+            }];
+        }
+    }
+
+
     if (!appDelegate.session.isOpen) {
         appDelegate.session = [[FBSession alloc] init];
 
@@ -42,6 +64,13 @@
             }];
         }
     }
+}
+
+- (void) mvToFeedView
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *initialViewController = [storyboard instantiateInitialViewController];
+    [self presentViewController:initialViewController animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

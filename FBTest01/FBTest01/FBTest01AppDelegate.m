@@ -30,10 +30,6 @@
 //    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
 
     FBTest01Auth *cyAuth = [FBTest01Auth new];
-    FBTest01User *currentUser = [cyAuth currentUser];
-
-    NSLog(@"currentUser         : %@", currentUser);
-    NSLog(@"currentUser.isActive: %d", currentUser.isActive);
 
     if (!cyAuth.sessionIsOpen) {
         NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
