@@ -7,6 +7,7 @@
 //
 
 #import "FBTest01AnotherViewController.h"
+#import "FBTest01AppDelegate.h"
 #import <UICKeyChainStore.h>
 
 @interface FBTest01AnotherViewController ()
@@ -48,7 +49,8 @@
 */
 
 - (IBAction)rmTokenFromLocal:(id)sender {
-    [UICKeyChainStore removeItemForKey:@"cyAccessToken"];
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    [appDelegate.cyAuth closeAndClearTokenInfo];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     UIViewController *initialViewController = [storyboard instantiateInitialViewController];

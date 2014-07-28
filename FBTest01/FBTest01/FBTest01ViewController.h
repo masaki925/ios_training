@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface FBTest01ViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
-- (IBAction)pushLogin:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *getDataButton;
+
+- (IBAction)pushCyLogin:(id)sender;
+- (IBAction)pushCyLogout:(id)sender;
+
 - (IBAction)getData:(id)sender;
-- (IBAction)getToken:(id)sender;
-- (IBAction)openAnotherView:(id)sender;
 
 @end

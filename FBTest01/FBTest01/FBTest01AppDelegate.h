@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "FBTest01Auth.h"
 
 @interface FBTest01AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) FBSession *session;
+@property (strong, nonatomic) FBTest01Auth *cyAuth;
 
 @end

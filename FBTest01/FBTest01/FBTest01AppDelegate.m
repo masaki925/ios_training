@@ -29,14 +29,14 @@
 //    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
 //    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
 
-    FBTest01Auth *cyAuth = [FBTest01Auth new];
+    _cyAuth = [FBTest01Auth new];
 
-    if (!cyAuth.sessionIsOpen) {
+    if (!_cyAuth.sessionIsOpen) {
         NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
-        if (cyAuth.hasToken) {
+        if (_cyAuth.hasToken) {
             NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
 
-            [cyAuth openSession:^(NSString *token){
+            [_cyAuth openCySession:^(NSString *token){
                 NSLog(@"didFinishLaunchingWithOptions: openSession: success");
                 NSLog(@"%@", token);
                 [self mvToFeedView];
