@@ -25,3 +25,5 @@ DerivedData
 # Cocoapods
 Pods/
 
+Config.xcconfig
+
