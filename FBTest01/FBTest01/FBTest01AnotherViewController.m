@@ -55,13 +55,16 @@
 }
 
 - (IBAction)pushGetData:(id)sender {
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
-    
+    [manager.requestSerializer setValue:appDelegate.cyAuth.getToken forHTTPHeaderField:@"cyAccessToken"];
+
     NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
     NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
     
-    [manager GET:[NSString stringWithFormat:@"%@://%@/api/countries", cyProtocol, cyFqdn] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@://%@/api/top/home", cyProtocol, cyFqdn] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

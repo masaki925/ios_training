@@ -233,4 +233,8 @@ CompletionBlock _completionHandler;
     [appDelegate.session closeAndClearTokenInformation];
 }
 
+- (NSString *)getToken {
+    return _accessToken.token;
+}
+
 @end

@@ -21,4 +21,5 @@
               failure:(void (^)(NSString *))failure;
 
 - (void)closeAndClearTokenInfo;
+- (NSString *)getToken;
 @end
