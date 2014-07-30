@@ -15,6 +15,9 @@
 #import <UICKeyChainStore.h>
 #import <Bolts.h>
 
+typedef void (^CompletionBlock)(NSString *);
+CompletionBlock _completionHandler;
+
 @interface FBTest01Auth ()
 
 @property FBTest01AccessToken *accessToken;
@@ -49,32 +52,83 @@
     }
 }
 
-//- (void)openCySession:(void (^)(NSString *))success
-//            failure:(void (^)(NSString *))failure {
-//    NSLog(@"FBTest01AccessToken: openSession");
-//
-//    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-//
-//    if (!appDelegate.session.isOpen) {
-//        appDelegate.session = [[FBSession alloc] init];
-//        
-//        if (appDelegate.session.state != FBSessionStateCreated) {
-//            // Create a new, logged out session.
-//            appDelegate.session = [[FBSession alloc] init];
-//        }
-//        // if the session isn't open, let's open it now and present the login UX to the user
-//        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-//                                                         FBSessionState status,
-//                                                         NSError *error) {
-//            // and here we make sure to update our UX according to the new session state
-//            NSLog(@"FBTest01Auth: openCySession");
-//            NSLog(@"FBTest01Auth: accessToken: %@", appDelegate.session.accessTokenData.accessToken);
-//
-//            //[self verify];
-//            //success(appDelegate.session.accessTokenData.accessToken);
-//        }];
-//    }
-//}
+- (void)verify {
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
+    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
+    
+    if (appDelegate.session.accessTokenData) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        [manager POST:[NSString stringWithFormat:@"%@://%@/api/sessions", cyProtocol, cyFqdn] parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken
+         }} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSString *token    = responseObject[@"access_token"];
+             NSString *username = responseObject[@"username"];
+             
+             [UICKeyChainStore setString:token forKey:@"cyAccessToken"];
+             NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
+             
+             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+             [ud setObject:username forKey:@"username"];
+             NSLog(@"username: %@", [ud objectForKey:@"username"]);
+             
+             FBTest01AccessToken *cyAccessToken = [FBTest01AccessToken new];
+             cyAccessToken.token = token;
+             _accessToken = cyAccessToken;
+             _hasToken = YES;
+             _sessionIsOpen = YES;
+
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+         }];
+    }
+}
+
+- (void)openCySession:(void (^)(NSString *))success
+            failure:(void (^)(NSString *))failure {
+    NSLog(@"FBTest01Auth: openSession");
+
+    _completionHandler = success;
+
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
+    if (!appDelegate.session.isOpen) {
+        appDelegate.session = [[FBSession alloc] init];
+
+        // if the session isn't open, let's open it now and present the login UX to the user
+        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                         FBSessionState status,
+                                                         NSError *error) {
+            // and here we make sure to update our UX according to the new session state
+            NSLog(@"FBTest01Auth: openCySession");
+            NSLog(@"FBTest01Auth: accessToken: %@", appDelegate.session.accessTokenData.accessToken);
+            [self updateFbSession];
+        }];
+    } else {
+        NSLog(@"appDelegate.session.isOpen");
+    }
+}
+
+- (void)updateFbSession {
+    NSLog(@"updateFbSession");
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
+    if (appDelegate.session.isOpen) {
+        NSLog(@"updateFbSession: fb session.isOpen");
+        if (_sessionIsOpen) {
+            NSLog(@"updateFbSession: cy sessionIsOpen");
+        } else {
+            NSLog(@"updateFbSession: ! cy sessionIsOpen");
+            [self verify];
+            _sessionIsOpen = YES;
+            _completionHandler(@"hoge");
+        }
+    } else {
+        _completionHandler(@"hoge");
+        NSLog(@"updateFbSession: ! fb session.isOpen");
+    }
+}
 
 // javascript っぽい書き方
 //        $bolt.get('/api/fbLogin').success( function(data) {
@@ -87,87 +141,87 @@
 //            // error handle
 //        });
 //- (void)nestedRequest {
-- (void)openCySession:(void (^)(NSString *))success
-            failure:(void (^)(NSString *))failure {
-    [[[self fbLogin] continueWithBlock:^id(BFTask *task) {
-        NSLog(@"do something for hoge: %@", task.result);
-        // ...
-        return [self cyLogin];
-    }] continueWithBlock:^id(BFTask *task){
-        NSLog(@"do something for fuga: %@", task.result);
-        return nil;
-    }];
-}
+//- (void)openCySession:(void (^)(NSString *))success
+//            failure:(void (^)(NSString *))failure {
+//    [[[self fbLogin] continueWithBlock:^id(BFTask *task) {
+//        NSLog(@"do something for hoge: %@", task.result);
+//        // ...
+//        return [self cyLogin];
+//    }] continueWithBlock:^id(BFTask *task){
+//        NSLog(@"do something for fuga: %@", task.result);
+//        return nil;
+//    }];
+//}
 
-- (BFTask *)fbLogin {
-    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-
-    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
-    if (!appDelegate.session.isOpen) {
-        appDelegate.session = [[FBSession alloc] init];
-
-        if (appDelegate.session.state != FBSessionStateCreated) {
-            // Create a new, logged out session.
-            appDelegate.session = [[FBSession alloc] init];
-        }
-        // if the session isn't open, let's open it now and present the login UX to the user
-        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-                                                         FBSessionState status,
-                                                         NSError *error) {
-            // and here we make sure to update our UX according to the new session state
-            NSLog(@"FBTest01Auth: openCySession");
-            NSLog(@"FBTest01Auth: accessToken: %@", appDelegate.session.accessTokenData.accessToken);
-            task.result = appDelegate.session.accessTokenData.accessToken;
-            
-            //[self verify];
-            //success(appDelegate.session.accessTokenData.accessToken);
-        }];
-    } else {
-        task.result = nil;
-    }
-
-    return task.task;
-}
-
-- (BFTask *)cyLogin {
-    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
-    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
-    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
-    
-    if (appDelegate.session.accessTokenData) {
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:[NSString stringWithFormat:@"%@://%@/api/sessions", cyProtocol, cyFqdn] parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken
-        }} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *token    = responseObject[@"access_token"];
-            NSString *username = responseObject[@"username"];
-            
-            [UICKeyChainStore setString:token forKey:@"cyAccessToken"];
-            NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
-
-            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-            [ud setObject:username forKey:@"username"];
-            NSLog(@"username: %@", [ud objectForKey:@"username"]);
-
-            FBTest01AccessToken *cyAccessToken = [FBTest01AccessToken new];
-            cyAccessToken.token = token;
-            _accessToken = cyAccessToken;
-            _hasToken = YES;
-            _sessionIsOpen = YES;
-
-            task.result = token;
-
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
-    } else {
-        task.result = nil;
-    }
-    
-    return task.task;
-}
+//- (BFTask *)fbLogin {
+//    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
+//
+//    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+//
+//    if (!appDelegate.session.isOpen) {
+//        appDelegate.session = [[FBSession alloc] init];
+//
+//        if (appDelegate.session.state != FBSessionStateCreated) {
+//            // Create a new, logged out session.
+//            appDelegate.session = [[FBSession alloc] init];
+//        }
+//        // if the session isn't open, let's open it now and present the login UX to the user
+//        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+//                                                         FBSessionState status,
+//                                                         NSError *error) {
+//            // and here we make sure to update our UX according to the new session state
+//            NSLog(@"FBTest01Auth: openCySession");
+//            NSLog(@"FBTest01Auth: accessToken: %@", appDelegate.session.accessTokenData.accessToken);
+//            task.result = appDelegate.session.accessTokenData.accessToken;
+//            
+//            //[self verify];
+//            //success(appDelegate.session.accessTokenData.accessToken);
+//        }];
+//    } else {
+//        task.result = nil;
+//    }
+//
+//    return task.task;
+//}
+//
+//- (BFTask *)cyLogin {
+//    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
+//    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+//    
+//    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
+//    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
+//    
+//    if (appDelegate.session.accessTokenData) {
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//        [manager POST:[NSString stringWithFormat:@"%@://%@/api/sessions", cyProtocol, cyFqdn] parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken
+//        }} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSString *token    = responseObject[@"access_token"];
+//            NSString *username = responseObject[@"username"];
+//            
+//            [UICKeyChainStore setString:token forKey:@"cyAccessToken"];
+//            NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
+//
+//            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//            [ud setObject:username forKey:@"username"];
+//            NSLog(@"username: %@", [ud objectForKey:@"username"]);
+//
+//            FBTest01AccessToken *cyAccessToken = [FBTest01AccessToken new];
+//            cyAccessToken.token = token;
+//            _accessToken = cyAccessToken;
+//            _hasToken = YES;
+//            _sessionIsOpen = YES;
+//
+//            task.result = token;
+//
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+//    } else {
+//        task.result = nil;
+//    }
+//    
+//    return task.task;
+//}
 
 - (void)closeAndClearTokenInfo {
     NSLog(@"closeAndClearTokenInfo");

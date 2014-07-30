@@ -10,5 +10,6 @@
 
 @interface FBTest01AnotherViewController : UIViewController
 - (IBAction)rmTokenFromLocal:(id)sender;
+- (IBAction)pushGetData:(id)sender;
 
 @end

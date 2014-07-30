@@ -41,11 +41,11 @@
         //}
         NSLog(@"pushCyLogin: !isOpen");
         [appDelegate.cyAuth openCySession:^(NSString *token){
-            NSLog(@"pushCyLogin: openSession: success");
+            NSLog(@"cyAuth openCySession success");
             NSLog(@"%@", token);
-//            [self mvToFeedView];
+            [self updateRootView];
         } failure:^(NSString *token){
-            NSLog(@"pushCyLogin: openSession: failure");
+            NSLog(@"cyAuth openCySession failure");
             NSLog(@"error: %@", token);
         }];
     }
@@ -57,25 +57,20 @@
     [appDelegate.cyAuth closeAndClearTokenInfo];
 }
 
-- (IBAction)getData:(id)sender {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
-
-    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
-    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
-
-    [manager GET:[NSString stringWithFormat:@"%@://%@/api/countries", cyProtocol, cyFqdn] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-}
-
-- (void) mvToFeedView
+- (void) updateRootView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
+    NSString *sbId = @"";
+    if (appDelegate.cyAuth.sessionIsOpen) {
+        sbId = @"SubStoryboard";
+    } else {
+        sbId = @"Main";
+    }
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:sbId bundle:[NSBundle mainBundle]];
     UIViewController *initialViewController = [storyboard instantiateInitialViewController];
-    [self presentViewController:initialViewController animated:NO completion:nil];
+    appDelegate.window.rootViewController = initialViewController;
 }
 
 @end

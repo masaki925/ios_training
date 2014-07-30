@@ -39,7 +39,7 @@
             [_cyAuth openCySession:^(NSString *token){
                 NSLog(@"didFinishLaunchingWithOptions: openSession: success");
                 NSLog(@"%@", token);
-                [self mvToFeedView];
+                [self updateRootView];
             } failure:^(NSString *token){
                 NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
                 NSLog(@"error: %@", token);
@@ -53,9 +53,16 @@
     return YES;
 }
 
-- (void) mvToFeedView
+- (void) updateRootView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
+    NSString *sbId = @"";
+    if (_cyAuth.sessionIsOpen) {
+        sbId = @"SubStoryboard";
+    } else {
+        sbId = @"Main";
+    }
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:sbId bundle:[NSBundle mainBundle]];
     UIViewController *initialViewController = [storyboard instantiateInitialViewController];
     self.window.rootViewController = initialViewController;
 }

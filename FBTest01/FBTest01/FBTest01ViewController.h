@@ -15,6 +15,4 @@
 - (IBAction)pushCyLogin:(id)sender;
 - (IBAction)pushCyLogout:(id)sender;
 
-- (IBAction)getData:(id)sender;
-
 @end
