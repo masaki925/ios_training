@@ -17,7 +17,9 @@
 
 - (FBTest01User *) currentUser;
 
-- (void)openSession:(void (^)(NSString *))success
-            failure:(void (^)(NSString *))failure;
+- (void)openCySession:(void (^)(NSString *))success
+              failure:(void (^)(NSString *))failure;
 
+- (void)closeAndClearTokenInfo;
+- (NSString *)getToken;
 @end

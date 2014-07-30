@@ -7,7 +7,9 @@
 //
 
 #import "FBTest01AnotherViewController.h"
+#import "FBTest01AppDelegate.h"
 #import <UICKeyChainStore.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface FBTest01AnotherViewController ()
 
@@ -48,10 +50,24 @@
 */
 
 - (IBAction)rmTokenFromLocal:(id)sender {
-    [UICKeyChainStore removeItemForKey:@"cyAccessToken"];
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    [appDelegate.cyAuth closeAndClearTokenInfo];    
+}
+
+- (IBAction)pushGetData:(id)sender {
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
+    [manager.requestSerializer setValue:appDelegate.cyAuth.getToken forHTTPHeaderField:@"cyAccessToken"];
+
+    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
+    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UIViewController *initialViewController = [storyboard instantiateInitialViewController];
-    [self presentViewController:initialViewController animated:NO completion:nil];
+    [manager GET:[NSString stringWithFormat:@"%@://%@/api/top/home", cyProtocol, cyFqdn] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 @end

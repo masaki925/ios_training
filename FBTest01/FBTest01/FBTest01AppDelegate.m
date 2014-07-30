@@ -29,17 +29,17 @@
 //    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
 //    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
 
-    FBTest01Auth *cyAuth = [FBTest01Auth new];
+    _cyAuth = [FBTest01Auth new];
 
-    if (!cyAuth.sessionIsOpen) {
+    if (!_cyAuth.sessionIsOpen) {
         NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
-        if (cyAuth.hasToken) {
+        if (_cyAuth.hasToken) {
             NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
 
-            [cyAuth openSession:^(NSString *token){
+            [_cyAuth openCySession:^(NSString *token){
                 NSLog(@"didFinishLaunchingWithOptions: openSession: success");
                 NSLog(@"%@", token);
-                [self mvToFeedView];
+                [self updateRootView];
             } failure:^(NSString *token){
                 NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
                 NSLog(@"error: %@", token);
@@ -53,9 +53,16 @@
     return YES;
 }
 
-- (void) mvToFeedView
+- (void) updateRootView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
+    NSString *sbId = @"";
+    if (_cyAuth.sessionIsOpen) {
+        sbId = @"SubStoryboard";
+    } else {
+        sbId = @"Main";
+    }
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:sbId bundle:[NSBundle mainBundle]];
     UIViewController *initialViewController = [storyboard instantiateInitialViewController];
     self.window.rootViewController = initialViewController;
 }
