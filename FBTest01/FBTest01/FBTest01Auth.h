@@ -15,7 +15,7 @@
 @property BOOL sessionIsOpen;
 @property BOOL hasToken;
 
-- (FBTest01User *) currentUser;
+- (FBTest01User *) getCurrentUser;
 
 - (void)openCySession:(void (^)(NSString *))success
               failure:(void (^)(NSString *))failure;

@@ -63,11 +63,15 @@
 
     NSString *sbId = @"";
     if (appDelegate.cyAuth.sessionIsOpen) {
-        sbId = @"SubStoryboard";
+        if ([appDelegate.cyAuth getCurrentUser].isActive) {
+            sbId = @"SubStoryboard";
+        } else {
+            sbId = @"RegisterProfile";
+        }
     } else {
         sbId = @"Main";
     }
-    
+        
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:sbId bundle:[NSBundle mainBundle]];
     UIViewController *initialViewController = [storyboard instantiateInitialViewController];
     appDelegate.window.rootViewController = initialViewController;

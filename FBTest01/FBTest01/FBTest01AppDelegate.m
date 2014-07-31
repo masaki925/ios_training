@@ -57,7 +57,11 @@
 {
     NSString *sbId = @"";
     if (_cyAuth.sessionIsOpen) {
-        sbId = @"SubStoryboard";
+        if ([_cyAuth getCurrentUser].isActive) {
+            sbId = @"SubStoryboard";
+        } else {
+            sbId = @"RegisterProfile";
+        }
     } else {
         sbId = @"Main";
     }

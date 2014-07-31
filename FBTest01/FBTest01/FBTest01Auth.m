@@ -21,6 +21,7 @@ CompletionBlock _completionHandler;
 @interface FBTest01Auth ()
 
 @property FBTest01AccessToken *accessToken;
+@property FBTest01User *currentUser;
 
 @end
 
@@ -29,16 +30,17 @@ CompletionBlock _completionHandler;
 - (instancetype) init {
     _sessionIsOpen = NO;
     _hasToken    = NO;
-    _accessToken = NULL;
+    _accessToken = nil;
+    _currentUser = nil;
 
     [self getAccessTokenFromLocal];
 
     return self;
 }
 
-- (FBTest01User *) currentUser {
+- (FBTest01User *) getCurrentUser {
     NSLog(@"FBTest01Auth currentUser");
-    return [FBTest01User new];
+    return _currentUser;
 }
 
 - (void) getAccessTokenFromLocal {
@@ -60,21 +62,28 @@ CompletionBlock _completionHandler;
     
     if (appDelegate.session.accessTokenData) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.securityPolicy.allowInvalidCertificates = YES;
         
         [manager POST:[NSString stringWithFormat:@"%@://%@/api/sessions", cyProtocol, cyFqdn] parameters:@{@"provider": @"facebook", @"access_token_hash": @{@"access_token": appDelegate.session.accessTokenData.accessToken
          }} success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSString *token    = responseObject[@"access_token"];
              NSString *username = responseObject[@"username"];
+             BOOL userIsActive = ([responseObject[@"active"] boolValue] == 1);
              
              [UICKeyChainStore setString:token forKey:@"cyAccessToken"];
              NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
              
              NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
              [ud setObject:username forKey:@"username"];
+             [ud setBool:userIsActive forKey:@"userIsActive"];
              NSLog(@"username: %@", [ud objectForKey:@"username"]);
+             NSLog(@"username: %@", [ud objectForKey:@"userIsActive"]);
              
              FBTest01AccessToken *cyAccessToken = [FBTest01AccessToken new];
              cyAccessToken.token = token;
+             
+             FBTest01User *currentUser = [FBTest01User new];
+             currentUser.isActive = userIsActive;
              _accessToken = cyAccessToken;
              _hasToken = YES;
              _sessionIsOpen = YES;
@@ -94,7 +103,7 @@ CompletionBlock _completionHandler;
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     if (!appDelegate.session.isOpen) {
-        appDelegate.session = [[FBSession alloc] init];
+        appDelegate.session = [[FBSession alloc] initWithPermissions:@[@"public_profile", @"email", @"user_friends"]];
 
         // if the session isn't open, let's open it now and present the login UX to the user
         [appDelegate.session openWithCompletionHandler:^(FBSession *session,

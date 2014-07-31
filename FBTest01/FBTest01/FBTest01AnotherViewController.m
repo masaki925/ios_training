@@ -58,6 +58,7 @@
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.securityPolicy.allowInvalidCertificates = YES;
     [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
     [manager.requestSerializer setValue:appDelegate.cyAuth.getToken forHTTPHeaderField:@"cyAccessToken"];
 

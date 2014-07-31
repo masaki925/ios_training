@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		385B728DBE064A8F8F54196E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A7F22D957A4F1F973DA45E /* libPods.a */; };
+		3D44FF22198B05E800206CB0 /* RegisterProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D44FF21198B05E800206CB0 /* RegisterProfile.storyboard */; };
+		3D44FF25198B068300206CB0 /* FBTest01RegisterProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44FF24198B068300206CB0 /* FBTest01RegisterProfileViewController.m */; };
 		3D877A7F197F29DA003B68CA /* FBTest01Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D877A7E197F29DA003B68CA /* FBTest01Auth.m */; };
 		3D877A83197F2C9A003B68CA /* FBTest01User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D877A82197F2C9A003B68CA /* FBTest01User.m */; };
 		3D8DF9F91981F6B9008A7484 /* FBTest01AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8DF9F81981F6B9008A7484 /* FBTest01AccessToken.m */; };
@@ -42,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		3D44FF2019888BBC00206CB0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		3D44FF21198B05E800206CB0 /* RegisterProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RegisterProfile.storyboard; sourceTree = "<group>"; };
+		3D44FF23198B068300206CB0 /* FBTest01RegisterProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01RegisterProfileViewController.h; sourceTree = "<group>"; };
+		3D44FF24198B068300206CB0 /* FBTest01RegisterProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTest01RegisterProfileViewController.m; sourceTree = "<group>"; };
 		3D877A7D197F29DA003B68CA /* FBTest01Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBTest01Auth.h; path = ../FBTest01Auth.h; sourceTree = "<group>"; };
 		3D877A7E197F29DA003B68CA /* FBTest01Auth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBTest01Auth.m; path = ../FBTest01Auth.m; sourceTree = "<group>"; };
 		3D877A81197F2C9A003B68CA /* FBTest01User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01User.h; sourceTree = "<group>"; };
@@ -158,6 +163,9 @@
 				3DC328B0196D12B900FA9A11 /* FBTest01AppDelegate.m */,
 				3DC328B2196D12B900FA9A11 /* Main.storyboard */,
 				3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */,
+				3D44FF21198B05E800206CB0 /* RegisterProfile.storyboard */,
+				3D44FF23198B068300206CB0 /* FBTest01RegisterProfileViewController.h */,
+				3D44FF24198B068300206CB0 /* FBTest01RegisterProfileViewController.m */,
 				3DBF5093197D08FD00C2CA07 /* FBTest01AnotherViewController.h */,
 				3DBF5094197D08FD00C2CA07 /* FBTest01AnotherViewController.m */,
 				3DC328B5196D12B900FA9A11 /* FBTest01ViewController.h */,
@@ -287,6 +295,7 @@
 				3DC328B9196D12B900FA9A11 /* Images.xcassets in Resources */,
 				3DC328AB196D12B900FA9A11 /* InfoPlist.strings in Resources */,
 				3DBF5092197D089200C2CA07 /* SubStoryboard.storyboard in Resources */,
+				3D44FF22198B05E800206CB0 /* RegisterProfile.storyboard in Resources */,
 				3DC328B4196D12B900FA9A11 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D44FF25198B068300206CB0 /* FBTest01RegisterProfileViewController.m in Sources */,
 				3DC328AD196D12B900FA9A11 /* main.m in Sources */,
 				3DC328B7196D12B900FA9A11 /* FBTest01ViewController.m in Sources */,
 				3D8DF9F91981F6B9008A7484 /* FBTest01AccessToken.m in Sources */,
