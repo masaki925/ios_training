@@ -68,6 +68,7 @@ CompletionBlock _completionHandler;
          }} success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSString *token    = responseObject[@"access_token"];
              NSString *username = responseObject[@"username"];
+             NSString *name     = responseObject[@"name"];
              BOOL userIsActive = ([responseObject[@"active"] boolValue] == 1);
              
              [UICKeyChainStore setString:token forKey:@"cyAccessToken"];
@@ -75,18 +76,27 @@ CompletionBlock _completionHandler;
              
              NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
              [ud setObject:username forKey:@"username"];
+             [ud setObject:name forKey:@"name"];
              [ud setBool:userIsActive forKey:@"userIsActive"];
              NSLog(@"username: %@", [ud objectForKey:@"username"]);
-             NSLog(@"username: %@", [ud objectForKey:@"userIsActive"]);
+             NSLog(@"userIsActive: %@", [ud objectForKey:@"userIsActive"]);
              
              FBTest01AccessToken *cyAccessToken = [FBTest01AccessToken new];
              cyAccessToken.token = token;
              
-             FBTest01User *currentUser = [FBTest01User new];
-             currentUser.isActive = userIsActive;
+             _currentUser = [FBTest01User new];
+             _currentUser.isActive = userIsActive;
+             _currentUser.username = username;
+             _currentUser.name = name;
              _accessToken = cyAccessToken;
              _hasToken = YES;
              _sessionIsOpen = YES;
+             
+             if (!_currentUser.isActive){
+                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegisterProfile" bundle:[NSBundle mainBundle]];
+                 UIViewController *initialViewController = [storyboard instantiateInitialViewController];
+                 [appDelegate.window.rootViewController presentViewController:initialViewController animated:NO completion:nil];
+             }
 
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error);

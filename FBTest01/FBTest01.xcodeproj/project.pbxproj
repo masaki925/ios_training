@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		385B728DBE064A8F8F54196E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A7F22D957A4F1F973DA45E /* libPods.a */; };
+		3D019B501991DF89000EF1C6 /* FBTest01PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D019B4F1991DF89000EF1C6 /* FBTest01PageContentViewController.m */; };
 		3D44FF22198B05E800206CB0 /* RegisterProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D44FF21198B05E800206CB0 /* RegisterProfile.storyboard */; };
 		3D44FF25198B068300206CB0 /* FBTest01RegisterProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44FF24198B068300206CB0 /* FBTest01RegisterProfileViewController.m */; };
 		3D877A7F197F29DA003B68CA /* FBTest01Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D877A7E197F29DA003B68CA /* FBTest01Auth.m */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D019B4E1991DF89000EF1C6 /* FBTest01PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01PageContentViewController.h; sourceTree = "<group>"; };
+		3D019B4F1991DF89000EF1C6 /* FBTest01PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTest01PageContentViewController.m; sourceTree = "<group>"; };
 		3D44FF2019888BBC00206CB0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		3D44FF21198B05E800206CB0 /* RegisterProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RegisterProfile.storyboard; sourceTree = "<group>"; };
 		3D44FF23198B068300206CB0 /* FBTest01RegisterProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTest01RegisterProfileViewController.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				3DC328AF196D12B900FA9A11 /* FBTest01AppDelegate.h */,
 				3DC328B0196D12B900FA9A11 /* FBTest01AppDelegate.m */,
 				3DC328B2196D12B900FA9A11 /* Main.storyboard */,
+				3D019B4E1991DF89000EF1C6 /* FBTest01PageContentViewController.h */,
+				3D019B4F1991DF89000EF1C6 /* FBTest01PageContentViewController.m */,
 				3DBF5091197D089200C2CA07 /* SubStoryboard.storyboard */,
 				3D44FF21198B05E800206CB0 /* RegisterProfile.storyboard */,
 				3D44FF23198B068300206CB0 /* FBTest01RegisterProfileViewController.h */,
@@ -257,6 +262,7 @@
 				ORGANIZATIONNAME = iwatest;
 				TargetAttributes = {
 					3DC3289C196D12B900FA9A11 = {
+						DevelopmentTeam = 4JZ8B336K6;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -355,6 +361,7 @@
 				3D877A7F197F29DA003B68CA /* FBTest01Auth.m in Sources */,
 				3D877A83197F2C9A003B68CA /* FBTest01User.m in Sources */,
 				3DC328B1196D12B900FA9A11 /* FBTest01AppDelegate.m in Sources */,
+				3D019B501991DF89000EF1C6 /* FBTest01PageContentViewController.m in Sources */,
 				3DBF5095197D08FD00C2CA07 /* FBTest01AnotherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,13 +488,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Masaki Iwamoto (53U42D6RCM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBTest01/FBTest01-Prefix.pch";
 				INFOPLIST_FILE = "FBTest01/FBTest01-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E28E5338-ACAC-4599-BC5F-4D6393EDA2DA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -498,13 +505,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Masaki Iwamoto (53U42D6RCM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBTest01/FBTest01-Prefix.pch";
 				INFOPLIST_FILE = "FBTest01/FBTest01-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E28E5338-ACAC-4599-BC5F-4D6393EDA2DA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

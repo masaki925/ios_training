@@ -10,15 +10,14 @@
 
 @interface FBTest01User ()
 
-@property NSString *username;
-
 @end
 
 @implementation FBTest01User
 
 - (instancetype) init{
         NSLog(@"FBTest01User: init!");
-        _username = @"testusername";
+        _username = nil;
+        _name = nil;
         _isActive = YES;
         return self;
 }

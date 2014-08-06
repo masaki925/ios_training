@@ -38,10 +38,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldShouldReturn:" destination="g7g-UZ-3V4" eventType="editingDidEndOnExit" id="gei-go-TpZ"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="nameField" destination="NFx-32-Uu6" id="ZiP-fH-NpH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OGu-eE-HwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

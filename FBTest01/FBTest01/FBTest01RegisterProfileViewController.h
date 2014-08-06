@@ -10,6 +10,9 @@
 
 @interface FBTest01RegisterProfileViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+
 - (IBAction)pushFinishButton:(id)sender;
+- (IBAction)textFieldShouldReturn:(UITextField *)textField;
 
 @end

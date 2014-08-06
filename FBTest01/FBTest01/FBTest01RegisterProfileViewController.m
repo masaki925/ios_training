@@ -8,6 +8,7 @@
 
 #import "FBTest01RegisterProfileViewController.h"
 #import "FBTest01AppDelegate.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface FBTest01RegisterProfileViewController ()
 
@@ -27,6 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    if (appDelegate.cyAuth){
+        NSString *name =[appDelegate.cyAuth getCurrentUser].name;
+        _nameField.text = name;
+    }
+
     // Do any additional setup after loading the view.
 }
 
@@ -39,12 +47,34 @@
 - (IBAction)pushFinishButton:(id)sender
 {
     NSLog(@"push");
+    
+    NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];
+    NSString *cyFqdn     = [[NSProcessInfo processInfo] environment][@"CY_FQDN"];
+
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SubStoryboard" bundle:[NSBundle mainBundle]];
-    UIViewController *initialViewController = [storyboard instantiateInitialViewController];
-    appDelegate.window.rootViewController = initialViewController;
+
+    NSString *username = [appDelegate.cyAuth getCurrentUser].username;
+    NSString *name = _nameField.text;
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+#ifdef DEBUG
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
+#endif
+    [manager.requestSerializer setValue:appDelegate.cyAuth.getToken forHTTPHeaderField:@"cyAccessToken"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+
+    [manager PUT:[NSString stringWithFormat:@"%@://%@/api/v3/users/%@", cyProtocol, cyFqdn, username] parameters:@{@"user": @{@"name": name} } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@", responseObject);
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
 }
 
+- (IBAction)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+}
 
 /*
 #pragma mark - Navigation

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBTest01PageContentViewController.h"
 
-@interface FBTest01ViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
-@property (weak, nonatomic) IBOutlet UIButton *getDataButton;
+@interface FBTest01ViewController : UIViewController <UIPageViewControllerDataSource>
+
+@property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (strong, nonatomic) NSArray *pageTitles;
+@property (strong, nonatomic) NSArray *pageImages;
 
 - (IBAction)pushCyLogin:(id)sender;
 - (IBAction)pushCyLogout:(id)sender;

@@ -11,5 +11,7 @@
 @interface FBTest01User : NSObject
 
 @property BOOL isActive;
+@property NSString *username;
+@property NSString *name;
 
 @end

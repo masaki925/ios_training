@@ -58,8 +58,10 @@
     FBTest01AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+#ifdef DEBUG
     manager.securityPolicy.allowInvalidCertificates = YES;
     [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"1derlust" password:@"compa4"];
+#endif
     [manager.requestSerializer setValue:appDelegate.cyAuth.getToken forHTTPHeaderField:@"cyAccessToken"];
 
     NSString *cyProtocol = [[NSProcessInfo processInfo] environment][@"CY_PROTOCOL"];

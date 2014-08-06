@@ -25,28 +25,40 @@
     NSLog(@"DEBUG");
     NSLog(@"cyAccessToken: %@", [UICKeyChainStore stringForKey:@"cyAccessToken"]);
 #endif
-//    NSString *parseAppId     = [[NSProcessInfo processInfo] environment][@"PARSE_APP_ID"];
-//    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
-//    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
+    NSString *parseAppId     = [[NSProcessInfo processInfo] environment][@"PARSE_APP_ID"];
+    NSString *parseClientKey = [[NSProcessInfo processInfo] environment][@"PARSE_CLIENT_KEY"];
+    [Parse setApplicationId:parseAppId clientKey:parseClientKey];
+
+    // Register for push notifications
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound];
 
     _cyAuth = [FBTest01Auth new];
 
-    if (!_cyAuth.sessionIsOpen) {
-        NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
-        if (_cyAuth.hasToken) {
-            NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.backgroundColor = [UIColor whiteColor];
+    
 
-            [_cyAuth openCySession:^(NSString *token){
-                NSLog(@"didFinishLaunchingWithOptions: openSession: success");
-                NSLog(@"%@", token);
-                [self updateRootView];
-            } failure:^(NSString *token){
-                NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
-                NSLog(@"error: %@", token);
-            }];
-            return YES;
-        }
-    }
+//    if (!_cyAuth.sessionIsOpen) {
+//        NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
+//        if (_cyAuth.hasToken) {
+//            NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
+//
+//            [_cyAuth openCySession:^(NSString *token){
+//                NSLog(@"didFinishLaunchingWithOptions: openSession: success");
+//                NSLog(@"%@", token);
+//                [self updateRootView];
+//            } failure:^(NSString *token){
+//                NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
+//                NSLog(@"error: %@", token);
+//            }];
+//            return YES;
+//        }
+//    }
 
 //    [self updateDeviceToken];
 
@@ -57,11 +69,7 @@
 {
     NSString *sbId = @"";
     if (_cyAuth.sessionIsOpen) {
-        if ([_cyAuth getCurrentUser].isActive) {
-            sbId = @"SubStoryboard";
-        } else {
-            sbId = @"RegisterProfile";
-        }
+        sbId = @"SubStoryboard";
     } else {
         sbId = @"Main";
     }
@@ -120,6 +128,8 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
+    
+    NSLog(@"APNS: didRegisterForRemoteNotificationsWithDeviceToken");
 
     // サービス側にdeviceTokenを登録
 }
@@ -133,6 +143,7 @@
 {
     // DEBUG
     [PFPush handlePush:userInfo];
+    NSLog(@"APNS: didReceiveRemoteNotification");
 }
 
 @end
