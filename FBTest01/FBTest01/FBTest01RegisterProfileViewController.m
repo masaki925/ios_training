@@ -64,7 +64,11 @@
     [manager.requestSerializer setValue:appDelegate.cyAuth.getToken forHTTPHeaderField:@"cyAccessToken"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
 
-    [manager PUT:[NSString stringWithFormat:@"%@://%@/api/v3/users/%@", cyProtocol, cyFqdn, username] parameters:@{@"user": @{@"name": name} } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *deviceToken = [ud stringForKey:@"deviceToken"];
+    NSLog(@"deviceToken: %@", deviceToken);
+
+    [manager PUT:[NSString stringWithFormat:@"%@://%@/api/v3/users/%@", cyProtocol, cyFqdn, username] parameters:@{@"user": @{@"name": name}, @"deviceToken": deviceToken} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"%@", responseObject);
             [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

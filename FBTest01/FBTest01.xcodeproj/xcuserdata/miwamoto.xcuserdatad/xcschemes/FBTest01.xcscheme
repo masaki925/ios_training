@@ -75,7 +75,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "CY_FQDN"
-            value = "compathy.masaki925.com:9000"
+            value = "10.0.1.4:9000"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

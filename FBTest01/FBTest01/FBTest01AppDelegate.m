@@ -132,6 +132,17 @@
     NSLog(@"APNS: didRegisterForRemoteNotificationsWithDeviceToken");
 
     // サービス側にdeviceTokenを登録
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+
+    // acording to: http://stackoverflow.com/questions/9372815/how-can-i-convert-my-device-token-nsdata-into-an-nsstring
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *deviceTokenString = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                                      ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                                      ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                                      ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+            
+    [ud setObject:deviceTokenString forKey:@"deviceToken"];
+    NSLog(@"deviceToken: %@", [ud stringForKey:@"deviceToken"]);
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
