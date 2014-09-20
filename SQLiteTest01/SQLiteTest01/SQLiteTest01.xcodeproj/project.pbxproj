@@ -26,6 +26,7 @@
 		3D60C91519CD572B00682987 /* banklist.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3D60C91419CD572B00682987 /* banklist.sqlite3 */; };
 		3D60C91819CD579800682987 /* FailedBankInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C91719CD579800682987 /* FailedBankInfo.m */; };
 		3D60C91B19CD599200682987 /* FailedBankDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C91A19CD599200682987 /* FailedBankDatabase.m */; };
+		3D60C91E19CD610900682987 /* FailedBanksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C91D19CD610900682987 /* FailedBanksListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		3D60C91719CD579800682987 /* FailedBankInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBankInfo.m; sourceTree = "<group>"; };
 		3D60C91919CD599200682987 /* FailedBankDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedBankDatabase.h; sourceTree = "<group>"; };
 		3D60C91A19CD599200682987 /* FailedBankDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBankDatabase.m; sourceTree = "<group>"; };
+		3D60C91C19CD610900682987 /* FailedBanksListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedBanksListViewController.h; sourceTree = "<group>"; };
+		3D60C91D19CD610900682987 /* FailedBanksListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBanksListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				3D60C91719CD579800682987 /* FailedBankInfo.m */,
 				3D60C91919CD599200682987 /* FailedBankDatabase.h */,
 				3D60C91A19CD599200682987 /* FailedBankDatabase.m */,
+				3D60C91C19CD610900682987 /* FailedBanksListViewController.h */,
+				3D60C91D19CD610900682987 /* FailedBanksListViewController.m */,
 			);
 			path = SQLiteTest01;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D60C8E919CD558300682987 /* IwaAppDelegate.m in Sources */,
+				3D60C91E19CD610900682987 /* FailedBanksListViewController.m in Sources */,
 				3D60C8E519CD558300682987 /* main.m in Sources */,
 				3D60C91819CD579800682987 /* FailedBankInfo.m in Sources */,
 				3D60C91B19CD599200682987 /* FailedBankDatabase.m in Sources */,
