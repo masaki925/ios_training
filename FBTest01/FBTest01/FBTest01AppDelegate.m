@@ -43,22 +43,22 @@
     pageControl.backgroundColor = [UIColor whiteColor];
     
 
-//    if (!_cyAuth.sessionIsOpen) {
-//        NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
-//        if (_cyAuth.hasToken) {
-//            NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
-//
-//            [_cyAuth openCySession:^(NSString *token){
-//                NSLog(@"didFinishLaunchingWithOptions: openSession: success");
-//                NSLog(@"%@", token);
-//                [self updateRootView];
-//            } failure:^(NSString *token){
-//                NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
-//                NSLog(@"error: %@", token);
-//            }];
-//            return YES;
-//        }
-//    }
+    if (!_cyAuth.sessionIsOpen) {
+        NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: !cyAuth.sessionIsOpen");
+        if (_cyAuth.hasToken) {
+            NSLog(@"FBTest01AppDelegate: didFinishLaunchingWithOptions: cyAuth.hasToken");
+
+            [_cyAuth openCySession:^(NSString *token){
+                NSLog(@"didFinishLaunchingWithOptions: openSession: success");
+                NSLog(@"%@", token);
+                [self updateRootView];
+            } failure:^(NSString *token){
+                NSLog(@"didFinishLaunchingWithOptions: openSession: failure");
+                NSLog(@"error: %@", token);
+            }];
+            return YES;
+        }
+    }
 
 //    [self updateDeviceToken];
 

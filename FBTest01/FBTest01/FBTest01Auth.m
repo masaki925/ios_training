@@ -136,7 +136,7 @@ CompletionBlock _completionHandler;
     if (appDelegate.session.isOpen) {
         NSLog(@"updateFbSession: fb session.isOpen");
         if (_sessionIsOpen) {
-            NSLog(@"updateFbSession: cy sessionIsOpen");
+            NSLog(@"updateFbSessionupdateFbSession: cy sessionIsOpen");
         } else {
             NSLog(@"updateFbSession: ! cy sessionIsOpen");
             [self verify];
