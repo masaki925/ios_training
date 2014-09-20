@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FailedBanksDetailViewController.h"
 
 @interface FailedBanksListViewController : UITableViewController
 
 @property (nonatomic, retain) NSArray *failedBankInfos;
+@property (nonatomic, retain) FailedBanksDetailViewController *details;
 
 @end

@@ -76,6 +76,15 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_details == nil) {
+        _details = [self.storyboard instantiateViewControllerWithIdentifier:@"FailedBanksDetailViewController"];
+    }
+    FailedBankInfo *info = [_failedBankInfos objectAtIndex:indexPath.row];
+    _details.uniqueId = info.uniqueId;
+    [self.navigationController pushViewController:_details animated:YES];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

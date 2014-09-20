@@ -27,6 +27,8 @@
 		3D60C91819CD579800682987 /* FailedBankInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C91719CD579800682987 /* FailedBankInfo.m */; };
 		3D60C91B19CD599200682987 /* FailedBankDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C91A19CD599200682987 /* FailedBankDatabase.m */; };
 		3D60C91E19CD610900682987 /* FailedBanksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C91D19CD610900682987 /* FailedBanksListViewController.m */; };
+		3D60C92119CD654500682987 /* FailedBankDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C92019CD654500682987 /* FailedBankDetails.m */; };
+		3D60C92419CD6A6700682987 /* FailedBanksDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D60C92319CD6A6700682987 /* FailedBanksDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,10 @@
 		3D60C91A19CD599200682987 /* FailedBankDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBankDatabase.m; sourceTree = "<group>"; };
 		3D60C91C19CD610900682987 /* FailedBanksListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedBanksListViewController.h; sourceTree = "<group>"; };
 		3D60C91D19CD610900682987 /* FailedBanksListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBanksListViewController.m; sourceTree = "<group>"; };
+		3D60C91F19CD654500682987 /* FailedBankDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedBankDetails.h; sourceTree = "<group>"; };
+		3D60C92019CD654500682987 /* FailedBankDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBankDetails.m; sourceTree = "<group>"; };
+		3D60C92219CD6A6700682987 /* FailedBanksDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedBanksDetailViewController.h; sourceTree = "<group>"; };
+		3D60C92319CD6A6700682987 /* FailedBanksDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedBanksDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,10 +148,14 @@
 				3D60C8DF19CD558300682987 /* Supporting Files */,
 				3D60C91619CD579800682987 /* FailedBankInfo.h */,
 				3D60C91719CD579800682987 /* FailedBankInfo.m */,
+				3D60C91F19CD654500682987 /* FailedBankDetails.h */,
+				3D60C92019CD654500682987 /* FailedBankDetails.m */,
 				3D60C91919CD599200682987 /* FailedBankDatabase.h */,
 				3D60C91A19CD599200682987 /* FailedBankDatabase.m */,
 				3D60C91C19CD610900682987 /* FailedBanksListViewController.h */,
 				3D60C91D19CD610900682987 /* FailedBanksListViewController.m */,
+				3D60C92219CD6A6700682987 /* FailedBanksDetailViewController.h */,
+				3D60C92319CD6A6700682987 /* FailedBanksDetailViewController.m */,
 			);
 			path = SQLiteTest01;
 			sourceTree = "<group>";
@@ -282,7 +292,9 @@
 				3D60C91E19CD610900682987 /* FailedBanksListViewController.m in Sources */,
 				3D60C8E519CD558300682987 /* main.m in Sources */,
 				3D60C91819CD579800682987 /* FailedBankInfo.m in Sources */,
+				3D60C92419CD6A6700682987 /* FailedBanksDetailViewController.m in Sources */,
 				3D60C91B19CD599200682987 /* FailedBankDatabase.m in Sources */,
+				3D60C92119CD654500682987 /* FailedBankDetails.m in Sources */,
 				3D60C8EF19CD558300682987 /* IwaMasterViewController.m in Sources */,
 				3D60C8F219CD558300682987 /* IwaDetailViewController.m in Sources */,
 			);
