@@ -17,6 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;
+    gai.dispatchInterval = 5;
+    [[gai logger] setLogLevel:kGAILogLevelError]; // ログレベルを変えることができる
+    [gai trackerWithTrackingId:GOOGLE_ANALYTICS_ID];
+
     return YES;
 }
 

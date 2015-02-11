@@ -1,0 +1,25 @@
+//
+//  PrefixHeader.pch
+//  iwaHoge02
+//
+//  Created by Masaki Iwamoto on 2015/02/11.
+//  Copyright (c) 2015年 Wanderlust, Inc. All rights reserved.
+//
+
+#ifndef iwaHoge02_PrefixHeader_pch
+#define iwaHoge02_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+// google analytics
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
+#endif
+
+#define GOOGLE_ANALYTICS_ID @"UA-43856306-3"
+
+#endif

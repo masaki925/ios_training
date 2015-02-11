@@ -1,0 +1,4 @@
+platform :ios, '7.1'
+
+pod 'GoogleAnalytics-iOS-SDK', '~> 3.10.0'
+
